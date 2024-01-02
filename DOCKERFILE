@@ -1,0 +1,24 @@
+# Reference:
+# https://docs.gitlab.com/omnibus/installation/index.html
+# https://about.gitlab.com/install/#ubuntu
+
+FROM ubuntu:22.04
+
+# Install and configure the necessary dependencies
+RUN apt-get update && \
+DEBIAN_FRONTEND=noninteractive apt-get install -yq curl openssh-server ca-certificates tzdata perl
+
+# Postfix (or Sendmail) to send notification emails. If you want to use another solution to send emails please skip this step
+RUN apt-get install -y postfix
+
+# Add the GitLab package repository and install the package
+RUN curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh | bash
+
+
+# Do not run EXTERNAL_URL="https://gitlab.example.com" apt-get install gitlab-ee on docker container.
+# This will occur ruby_block[wait for logrotate service socket] action run error.
+RUN apt-get install gitlab-ee
+# GitLab was unable to detect a valid hostname for your instance.
+# Please configure a URL for your GitLab instance by setting `external_url`                                               configuration in /etc/gitlab/gitlab.rb file.                                                                            Then, you can start your GitLab instance by running the following command:
+# gitlab-ctl reconfigure
+
