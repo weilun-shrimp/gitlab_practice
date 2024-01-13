@@ -4,6 +4,10 @@ Reference: [GitLab CI 實作記錄(1) - 使用 Docker 在同台主機運行 GitL
 
 Due to docker.sock issue. If you are running WSL on windows, you can't not install gitlab runner from scratch. You must run runner from officail image.
 
+# <span style="color:red">Must to do!!</span><br>
+
+add host、gitlab_container、gitlab_runner_container hosts file gitlab container DNS value.
+
 # Docker
 
 ## Run
