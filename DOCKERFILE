@@ -28,3 +28,12 @@
 # So I use gitlab/gitlab-ee:latest to instead and it work and go through smoothly.
 
 FROM gitlab/gitlab-ee:latest
+
+
+# install gitlab runner for CICD
+RUN curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" | bash
+RUN apt-get install -y gitlab-runner
+
+
+# Only for WSL install docker executor
+RUN curl https:/get.docker.com | sh
